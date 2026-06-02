@@ -49,7 +49,7 @@ const AchievementsSection = () => {
         <motion.div
           key={i}
           variants={item}
-          className="glass-card p-7 md:p-8 group relative overflow-hidden"
+          className="glass-card p-5 md:p-8 group relative overflow-hidden"
         >
           <div className="relative z-10 flex items-start gap-5">
             <div className="flex-shrink-0 w-11 h-11 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">

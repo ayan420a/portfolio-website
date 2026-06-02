@@ -14,7 +14,7 @@ const EducationSection = () => {
   const y = useTransform(scrollYProgress, [0, 1], [60, 0]);
 
   return (
-    <motion.div ref={ref} style={{ opacity, y }} className="glass-card p-8 md:p-10">
+    <motion.div ref={ref} style={{ opacity, y }} className="glass-card p-5 md:p-10">
       <div className="flex items-start gap-5">
         {/* Icon */}
         <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">

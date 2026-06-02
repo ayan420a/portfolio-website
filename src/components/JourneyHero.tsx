@@ -13,8 +13,9 @@ const JourneyHero = () => {
   const heroY = useTransform(scrollY, [0, 350], [0, -40]);
   const heroFilter = useTransform(scrollY, [0, 350], ["blur(0px)", "blur(12px)"]);
  
-  // Stagger letter animations for the name
-  const nameLetters = "MOHD AYAN".split("");
+  // Stagger letter animations for the name, split by word to prevent mobile line wrap scrambling
+  const firstWord = "MOHD".split("");
+  const secondWord = "AYAN".split("");
  
   return (
     <motion.section
@@ -32,18 +33,18 @@ const JourneyHero = () => {
       <div className="glow-orb glow-pink w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
  
       {/* Starry Night Crescent Moon (Top Right) */}
-      <div className="absolute top-[12%] right-[8%] w-32 h-32 pointer-events-none z-10 select-none">
+      <div className="absolute top-[8%] right-[5%] sm:top-[12%] sm:right-[8%] w-16 h-16 sm:w-32 sm:h-32 pointer-events-none z-10 select-none">
         {/* Radiating Halos */}
-        <div className="absolute inset-0 rounded-full bg-amber-500/5 animate-pulse scale-150" style={{ filter: "blur(24px)" }} />
-        <div className="absolute inset-2 rounded-full bg-yellow-400/10 animate-pulse scale-125" style={{ filter: "blur(12px)" }} />
-        <div className="absolute inset-6 rounded-full bg-yellow-300/25" style={{ filter: "blur(4px)" }} />
+        <div className="absolute inset-0 rounded-full bg-amber-500/5 animate-pulse scale-150 blur-[12px] sm:blur-[24px]" />
+        <div className="absolute inset-2 rounded-full bg-yellow-400/10 animate-pulse scale-125 blur-[6px] sm:blur-[12px]" />
+        <div className="absolute inset-4 sm:inset-6 rounded-full bg-yellow-300/25 blur-[2px] sm:blur-[4px]" />
         {/* Crescent Shape */}
-        <div className="absolute inset-8 rounded-full bg-gradient-to-tr from-yellow-300 to-amber-500 shadow-[0_0_25px_rgba(253,224,71,0.75)]" />
-        <div className="absolute inset-8 rounded-full bg-[#0a0a0a] translate-x-3.5 -translate-y-3.5" />
+        <div className="absolute inset-4 sm:inset-8 rounded-full bg-gradient-to-tr from-yellow-300 to-amber-500 shadow-[0_0_15px_rgba(253,224,71,0.75)] sm:shadow-[0_0_25px_rgba(253,224,71,0.75)]" />
+        <div className="absolute inset-4 sm:inset-8 rounded-full bg-[#0a0a0a] translate-x-2 -translate-y-2 sm:translate-x-3.5 sm:-translate-y-3.5" />
       </div>
  
       {/* Cypress Tree Silhouette (Bottom Left) */}
-      <div className="absolute bottom-0 left-[3%] w-56 h-[55vh] pointer-events-none z-10 opacity-20 select-none">
+      <div className="absolute bottom-0 left-[3%] w-32 h-[35vh] sm:w-56 sm:h-[55vh] pointer-events-none z-10 opacity-20 select-none">
         <svg viewBox="0 0 100 200" className="w-full h-full text-[#032018] fill-current">
           {/* Flame-like organic paths representing the cypress */}
           <path d="M50,200 C30,175 18,135 22,100 C27,70 32,50 42,20 C39,40 37,65 39,85 C42,105 45,125 48,150 C50,125 53,105 56,85 C58,65 56,40 53,20 C63,50 68,70 73,100 C78,135 68,175 50,200 Z" />
@@ -129,34 +130,60 @@ const JourneyHero = () => {
           Welcome to my journey
         </motion.p>
  
-        {/* Name - letter by letter */}
-        <div className="flex items-center justify-center gap-1 md:gap-3 mb-6 flex-wrap">
-          {nameLetters.map((letter, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 60, rotateX: -90 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{
-                duration: 0.6,
-                delay: 0.5 + i * 0.07,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
-              className={`text-6xl md:text-8xl lg:text-[10rem] font-black leading-none tracking-tight ${
-                letter === " " ? "w-4 md:w-8" : ""
-              }`}
-              style={{
-                fontFamily: "var(--font-cinzel), serif",
-                background:
-                  "linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.6) 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                textShadow: "none",
-              }}
-            >
-              {letter === " " ? "\u00A0" : letter}
-            </motion.span>
-          ))}
+        {/* Name - letter by letter, grouped by words so they don't break/wrap mid-word on mobile */}
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-6">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
+            {firstWord.map((letter, i) => (
+              <motion.span
+                key={`first-${i}`}
+                initial={{ opacity: 0, y: 60, rotateX: -90 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.5 + i * 0.07,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
+                className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black leading-none tracking-tight"
+                style={{
+                  fontFamily: "var(--font-cinzel), serif",
+                  background:
+                    "linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.6) 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  textShadow: "none",
+                }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </div>
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
+            {secondWord.map((letter, i) => (
+              <motion.span
+                key={`second-${i}`}
+                initial={{ opacity: 0, y: 60, rotateX: -90 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.5 + (firstWord.length + i) * 0.07,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
+                className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black leading-none tracking-tight"
+                style={{
+                  fontFamily: "var(--font-cinzel), serif",
+                  background:
+                    "linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.6) 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  textShadow: "none",
+                }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </div>
         </div>
  
         {/* Subtitle */}

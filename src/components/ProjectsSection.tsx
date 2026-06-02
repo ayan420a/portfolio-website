@@ -100,7 +100,7 @@ const ProjectsSection = () => {
         <motion.div
           key={index}
           variants={cardVariant}
-          className="glass-card p-8 md:p-10 group relative overflow-hidden"
+          className="glass-card p-5 md:p-10 group relative overflow-hidden"
         >
           <div className="relative z-10">
             {/* Header */}

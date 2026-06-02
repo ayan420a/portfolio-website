@@ -19,28 +19,55 @@ const ScrollBackground = () => {
   const { scrollYProgress } = useScroll();
   const frameIndex = useTransform(scrollYProgress, [0, 1], [0, FRAME_COUNT - 1]);
 
-  // Preload all frames
+  // Preload all frames progressively to prevent loading hang
   useEffect(() => {
-    const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
 
-    for (let i = 0; i < FRAME_COUNT; i++) {
-      const img = new Image();
-      const frameNum = i.toString().padStart(2, "0");
-      img.src = `/sequence/frame_${frameNum}_delay-0.066s.png`;
+    // Load first frame immediately to unlock the page
+    const firstImg = new Image();
+    firstImg.src = `/sequence/frame_00_delay-0.066s.png`;
 
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === FRAME_COUNT) setImagesLoaded(true);
-      };
-      img.onerror = () => {
-        console.error(`Failed to load frame ${i}`);
-        loadedCount++;
-        if (loadedCount === FRAME_COUNT) setImagesLoaded(true);
-      };
-      loadedImages.push(img);
-    }
-    setImages(loadedImages);
+    const startLoadingRemaining = () => {
+      // Initialize full array with firstImg so we have no empty elements
+      const allImgs = Array(FRAME_COUNT).fill(firstImg);
+      setImages(allImgs);
+
+      // Load remaining frames asynchronously
+      for (let i = 0; i < FRAME_COUNT; i++) {
+        if (i === 0) {
+          loadedCount++;
+          continue;
+        }
+
+        const img = new Image();
+        img.src = `/sequence/frame_${i.toString().padStart(2, "0")}_delay-0.066s.png`;
+
+        img.onload = () => {
+          loadedCount++;
+          setImages((prev) => {
+            const next = [...prev];
+            next[i] = img;
+            return next;
+          });
+        };
+
+        img.onerror = () => {
+          console.error(`Failed to load frame ${i}`);
+          loadedCount++;
+        };
+      }
+    };
+
+    firstImg.onload = () => {
+      setImagesLoaded(true);
+      startLoadingRemaining();
+    };
+
+    firstImg.onerror = () => {
+      // Fallback: unlock screen even if first image fails
+      setImagesLoaded(true);
+      startLoadingRemaining();
+    };
   }, []);
 
   // Render loop — draws current frame based on scroll position

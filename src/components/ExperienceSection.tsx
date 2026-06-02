@@ -54,7 +54,7 @@ const ExperienceSection = () => {
     >
       {/* Main experience */}
       {experiences.map((exp, i) => (
-        <motion.div key={i} variants={item} className="glass-card p-8 md:p-10">
+        <motion.div key={i} variants={item} className="glass-card p-5 md:p-10">
           <div className="flex items-start gap-5">
             <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
               <Briefcase className="w-6 h-6 text-[#00f0ff] drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]" />
@@ -111,7 +111,7 @@ const ExperienceSection = () => {
           <motion.div
             key={i}
             variants={item}
-            className="glass-card p-6 group"
+            className="glass-card p-5 sm:p-6 group"
           >
             <div className="flex items-center gap-3 mb-3">
               <div className="w-1.5 h-7 rounded-full bg-[#00f0ff] shadow-[0_0_8px_rgba(0,240,255,0.6)]" />

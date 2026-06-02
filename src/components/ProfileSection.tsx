@@ -16,7 +16,7 @@ const ProfileSection = () => {
   return (
     <motion.div ref={ref} style={{ opacity, y }} className="space-y-5">
       {/* Quote-style profile */}
-      <div className="glass-card p-8 md:p-10 relative overflow-hidden">
+      <div className="glass-card p-5 md:p-10 relative overflow-hidden">
         {/* Decorative quote mark */}
         <div className="absolute -top-4 -left-2 text-8xl font-serif text-white/[0.03] leading-none select-none">
           &ldquo;
@@ -64,7 +64,7 @@ const ProfileSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 + i * 0.1 }}
-            className="glass-card p-5 text-center group"
+            className="glass-card p-3 sm:p-5 text-center group"
           >
             <p className="text-2xl md:text-3xl font-extrabold text-[#00f0ff] mb-1 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
               {stat.value}

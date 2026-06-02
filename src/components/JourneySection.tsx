@@ -29,12 +29,24 @@ const JourneySection = ({
   const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
 
+  // Check screen width for responsiveness (SSR safe)
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Side-specific x transform for desktop timeline layout
   const xLeft = useTransform(scrollYProgress, [0, 1], [-60, 0]);
   const xRight = useTransform(scrollYProgress, [0, 1], [60, 0]);
   const xCenter = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
-  const x = side === "left" ? xLeft : side === "right" ? xRight : xCenter;
+  const x = isMobile ? 0 : side === "left" ? xLeft : side === "right" ? xRight : xCenter;
 
   return (
     <div ref={sectionRef} id={id} className="relative">

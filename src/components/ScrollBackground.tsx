@@ -107,25 +107,44 @@ const ScrollBackground = () => {
       const index = Math.round(frameIndex.get());
       const img = images[Math.min(Math.max(index, 0), FRAME_COUNT - 1)];
       drawFrame(img);
-      animationFrameId = requestAnimationFrame(render);
     };
 
+    // Frame loop for requestAnimationFrame
+    const loop = () => {
+      render();
+      animationFrameId = requestAnimationFrame(loop);
+    };
+    loop();
+
+    // Force immediate draw on touch-scroll for mobile devices
+    const unsubscribeScroll = scrollYProgress.on("change", () => {
+      render();
+    });
+
+    let lastWidth = 0;
     const handleResize = () => {
       if (canvasRef.current) {
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        // Avoid resizing canvas on mobile address-bar height changes (prevents blank canvas flash)
+        if (w !== lastWidth) {
+          canvasRef.current.width = w;
+          canvasRef.current.height = h;
+          lastWidth = w;
+          render();
+        }
       }
     };
 
     window.addEventListener("resize", handleResize);
     handleResize();
-    render();
 
     return () => {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
+      unsubscribeScroll();
     };
-  }, [imagesLoaded, images, frameIndex]);
+  }, [imagesLoaded, images, frameIndex, scrollYProgress]);
 
   return (
     <div className="fixed inset-0 z-0">

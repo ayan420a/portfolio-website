@@ -62,7 +62,7 @@ const NavDots = () => {
         pointerEvents: isVisible ? "auto" as const : "none" as const,
       }}
       transition={{ duration: 0.4 }}
-      className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-3"
+      className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-3"
     >
       <div className="glass-card p-2 flex flex-col items-center gap-1">
         {navItems.map((item) => {

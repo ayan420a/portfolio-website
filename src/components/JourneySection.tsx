@@ -52,7 +52,7 @@ const JourneySection = ({
     <div ref={sectionRef} id={id} className="relative">
       <motion.div
         style={{ opacity, y, scale, x }}
-        className={`relative z-10 max-w-3xl mx-auto px-6 md:px-0 ${
+        className={`relative z-10 max-w-3xl mx-auto pl-8 pr-4 md:px-0 ${
           side === "left"
             ? "md:mr-auto md:ml-[8%] md:pr-16"
             : side === "right"

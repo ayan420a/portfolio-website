@@ -69,7 +69,7 @@ const ProfileSection = () => {
             <p className="text-2xl md:text-3xl font-extrabold text-[#00f0ff] mb-1 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
               {stat.value}
             </p>
-            <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-widest group-hover:text-neutral-200 transition-colors">
+            <p className="text-[8px] sm:text-[10px] text-neutral-400 font-bold uppercase tracking-normal sm:tracking-widest group-hover:text-neutral-200 transition-colors">
               {stat.label}
             </p>
           </motion.div>

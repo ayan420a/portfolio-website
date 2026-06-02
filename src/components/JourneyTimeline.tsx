@@ -17,7 +17,7 @@ const JourneyTimeline = () => {
       <CurvedTimeline />
 
       {/* Mobile timeline line (left side, simple) */}
-      <div className="md:hidden absolute left-8 top-0 bottom-0 w-[2.5px]">
+      <div className="md:hidden absolute left-4 top-0 bottom-0 w-[2px]">
         <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/20 via-cyan-400 to-purple-500/20" />
       </div>
 

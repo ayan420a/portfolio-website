@@ -99,7 +99,22 @@ const CurvedTimeline = () => {
             <stop offset="80%" stopColor="#00f0ff" stopOpacity="0.8" />
             <stop offset="100%" stopColor="#00f0ff" stopOpacity="0.2" />
           </linearGradient>
-
+ 
+          {/* Steampunk / Starry Night gold brushstroke gradient */}
+          <linearGradient id="timeline-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.1" />
+            <stop offset="30%" stopColor="#f59e0b" stopOpacity="0.75" />
+            <stop offset="70%" stopColor="#d97706" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="#d97706" stopOpacity="0.1" />
+          </linearGradient>
+ 
+          {/* Starry Night cobalt background gradient */}
+          <linearGradient id="timeline-cobalt" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#1e3a8a" stopOpacity="0.15" />
+            <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0.15" />
+          </linearGradient>
+ 
           {/* Glow gradient — thick and glowing */}
           <linearGradient id="timeline-glow" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#00f0ff" stopOpacity="0" />
@@ -108,7 +123,7 @@ const CurvedTimeline = () => {
             <stop offset="80%" stopColor="#00f0ff" stopOpacity="0.4" />
             <stop offset="100%" stopColor="#00f0ff" stopOpacity="0" />
           </linearGradient>
-
+ 
           {/* Subtle glow filter */}
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="5" result="blur" />
@@ -117,7 +132,7 @@ const CurvedTimeline = () => {
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
-
+ 
           {/* Dot glow — subtle */}
           <filter id="dot-glow" x="-200%" y="-200%" width="500%" height="500%">
             <feGaussianBlur stdDeviation="4" result="blur" />
@@ -127,16 +142,16 @@ const CurvedTimeline = () => {
             </feMerge>
           </filter>
         </defs>
-
+ 
         {/* Background path (faint) */}
         <path
           d={pathD}
-          stroke="rgba(0, 240, 255, 0.08)"
-          strokeWidth="4"
+          stroke="rgba(0, 240, 255, 0.05)"
+          strokeWidth="5"
           fill="none"
           strokeLinecap="round"
         />
-
+ 
         {/* Glow layer (thick, blurred) */}
         <motion.path
           d={pathD}
@@ -151,19 +166,45 @@ const CurvedTimeline = () => {
           strokeDasharray="1"
           strokeDashoffset="0"
         />
-
-        {/* Main path (draws on scroll) */}
+ 
+        {/* Swirl Current 1: Cobalt Wind Swirl (Dashed, thick) */}
         <motion.path
           d={pathD}
-          stroke="url(#timeline-gradient)"
-          strokeWidth="3"
+          stroke="url(#timeline-cobalt)"
+          strokeWidth="5.5"
           fill="none"
           strokeLinecap="round"
           style={{
             pathLength: smoothProgress,
           }}
-          strokeDasharray="1"
-          strokeDashoffset="0"
+          strokeDasharray="15, 25"
+        />
+ 
+        {/* Swirl Current 2: Main Cyan/Purple Flow (Dashed, medium) */}
+        <motion.path
+          d={pathD}
+          stroke="url(#timeline-gradient)"
+          strokeWidth="3.2"
+          fill="none"
+          strokeLinecap="round"
+          style={{
+            pathLength: smoothProgress,
+          }}
+          strokeDasharray="25, 12"
+        />
+ 
+        {/* Swirl Current 3: Golden Starlight Swirl (Dashed, thin, offset) */}
+        <motion.path
+          d={pathD}
+          stroke="url(#timeline-gold)"
+          strokeWidth="1.8"
+          fill="none"
+          strokeLinecap="round"
+          transform="translate(6, -4)"
+          style={{
+            pathLength: smoothProgress,
+          }}
+          strokeDasharray="8, 16"
         />
 
         {/* Section dots */}

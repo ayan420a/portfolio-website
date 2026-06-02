@@ -31,33 +31,85 @@ const JourneyHero = () => {
       <div className="glow-orb glow-blue w-[500px] h-[500px] -bottom-20 -left-20" />
       <div className="glow-orb glow-pink w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
  
-      {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Starry Night Crescent Moon (Top Right) */}
+      <div className="absolute top-[12%] right-[8%] w-32 h-32 pointer-events-none z-10 select-none">
+        {/* Radiating Halos */}
+        <div className="absolute inset-0 rounded-full bg-amber-500/5 animate-pulse scale-150" style={{ filter: "blur(24px)" }} />
+        <div className="absolute inset-2 rounded-full bg-yellow-400/10 animate-pulse scale-125" style={{ filter: "blur(12px)" }} />
+        <div className="absolute inset-6 rounded-full bg-yellow-300/25" style={{ filter: "blur(4px)" }} />
+        {/* Crescent Shape */}
+        <div className="absolute inset-8 rounded-full bg-gradient-to-tr from-yellow-300 to-amber-500 shadow-[0_0_25px_rgba(253,224,71,0.75)]" />
+        <div className="absolute inset-8 rounded-full bg-[#0a0a0a] translate-x-3.5 -translate-y-3.5" />
+      </div>
+ 
+      {/* Cypress Tree Silhouette (Bottom Left) */}
+      <div className="absolute bottom-0 left-[3%] w-56 h-[55vh] pointer-events-none z-10 opacity-20 select-none">
+        <svg viewBox="0 0 100 200" className="w-full h-full text-[#032018] fill-current">
+          {/* Flame-like organic paths representing the cypress */}
+          <path d="M50,200 C30,175 18,135 22,100 C27,70 32,50 42,20 C39,40 37,65 39,85 C42,105 45,125 48,150 C50,125 53,105 56,85 C58,65 56,40 53,20 C63,50 68,70 73,100 C78,135 68,175 50,200 Z" />
+          <path d="M40,200 C25,165 15,125 22,95 C28,65 30,45 40,15 C37,35 35,60 37,80 C40,100 43,120 45,145 C47,120 50,100 53,80 C55,60 53,35 50,15 C60,45 65,65 70,95 C75,125 65,165 40,200 Z" opacity="0.6" />
+        </svg>
+      </div>
+ 
+      {/* Starry Night Pulsing Stars with Concentric Halos */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         {[
-          { l: 5, t: 12 }, { l: 15, t: 68 }, { l: 25, t: 35 }, { l: 38, t: 82 },
-          { l: 48, t: 18 }, { l: 55, t: 55 }, { l: 62, t: 90 }, { l: 72, t: 25 },
-          { l: 80, t: 60 }, { l: 88, t: 42 }, { l: 10, t: 45 }, { l: 30, t: 15 },
-          { l: 42, t: 72 }, { l: 58, t: 8 }, { l: 68, t: 50 }, { l: 78, t: 85 },
-          { l: 92, t: 30 }, { l: 20, t: 95 }, { l: 45, t: 38 }, { l: 85, t: 75 },
-        ].map((pos, i) => (
-          <motion.div
+          { x: "12%", y: "18%", size: 22 },
+          { x: "82%", y: "30%", size: 26 },
+          { x: "28%", y: "70%", size: 20 },
+          { x: "72%", y: "78%", size: 24 },
+          { x: "18%", y: "48%", size: 18 },
+          { x: "58%", y: "15%", size: 28 },
+          { x: "40%", y: "40%", size: 20 },
+        ].map((star, i) => (
+          <div
             key={i}
-            className="absolute w-1 h-1 rounded-full bg-white/20"
-            style={{
-              left: `${pos.l}%`,
-              top: `${pos.t}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: 3 + (i % 5) * 0.8,
-              repeat: Infinity,
-              delay: (i % 7) * 0.3,
-              ease: "easeInOut",
-            }}
-          />
+            className="absolute"
+            style={{ left: star.x, top: star.y }}
+          >
+            {/* Outer Radiating Halo Ring */}
+            <motion.div
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-yellow-400/20"
+              style={{ width: star.size * 3.5, height: star.size * 3.5 }}
+              animate={{
+                opacity: [0.1, 0.4, 0.1],
+                scale: [0.9, 1.1, 0.9],
+              }}
+              transition={{
+                duration: 4 + (i % 3) * 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            {/* Mid Halo Ring */}
+            <motion.div
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-yellow-400/10 border-dashed"
+              style={{ width: star.size * 2, height: star.size * 2 }}
+              animate={{
+                rotate: 360,
+              }}
+              transition={{
+                duration: 15 + i * 5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+            {/* Soft Glow Core */}
+            <div className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-400/10" style={{ width: star.size * 1.8, height: star.size * 1.8, filter: "blur(6px)" }} />
+            {/* Star Core Center */}
+            <motion.div
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-yellow-200 via-yellow-300 to-amber-400 shadow-[0_0_15px_rgba(253,224,71,0.85)]"
+              style={{ width: star.size * 0.45, height: star.size * 0.45 }}
+              animate={{
+                scale: [0.85, 1.15, 0.85],
+              }}
+              transition={{
+                duration: 2.5 + (i % 4) * 0.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </div>
         ))}
       </div>
  

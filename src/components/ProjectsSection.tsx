@@ -28,7 +28,7 @@ const projects = [
       "Supabase",
     ],
     icon: Sparkles,
-    links: { live: "#" },
+    links: { live: "https://vani-ai-phi.vercel.app/" },
   },
   {
     title: "AI Face Recognition Attendance",
@@ -43,7 +43,10 @@ const projects = [
       "Pandas",
     ],
     icon: Scan,
-    links: { github: "#", live: "#" },
+    links: {
+      github: "https://github.com/ayan420a/Face-recognition-attendance-system-Backend-",
+      live: "https://facerecognitionateendance.netlify.app/",
+    },
   },
   {
     title: "RN MASH Auto Parts Website",
@@ -51,7 +54,10 @@ const projects = [
       "Responsive automotive parts website with product showcase pages, intuitive navigation, and mobile-friendly layouts.",
     tech: ["HTML", "CSS", "JavaScript"],
     icon: Store,
-    links: { github: "#", live: "#" },
+    links: {
+      github: "https://github.com/ayan420a/Rnmashautoparts",
+      live: "https://rnmashautoparts.netlify.app/",
+    },
   },
   {
     title: "RN MASH E-Commerce Website",
@@ -59,7 +65,10 @@ const projects = [
       "Responsive e-commerce platform with product listings, category navigation, and reusable modern UI components.",
     tech: ["HTML", "CSS", "JavaScript"],
     icon: ShoppingCart,
-    links: { github: "#", live: "#" },
+    links: {
+      github: "https://github.com/ayan420a/RN-MASH-e-commerce-website",
+      live: "https://darling-centaur-79bb6f.netlify.app/",
+    },
   },
 ];
 
@@ -104,23 +113,27 @@ const ProjectsSection = () => {
                   <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-[#00f0ff] transition-colors">
                     {project.title}
                   </h3>
-                  <div className="flex items-center gap-2 mt-1">
+                  <div className="flex flex-wrap items-center gap-3 mt-3">
                     {project.links.github && (
                       <a
                         href={project.links.github}
-                        className="text-neutral-400 hover:text-[#00f0ff] transition-colors"
-                        aria-label="GitHub"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-cyan-500/10 text-[#00f0ff] border border-cyan-500/25 hover:bg-cyan-500/20 text-xs font-semibold transition-all duration-300"
                       >
                         <GitFork className="w-3.5 h-3.5" />
+                        <span>GitHub</span>
                       </a>
                     )}
                     {project.links.live && (
                       <a
                         href={project.links.live}
-                        className="text-neutral-400 hover:text-[#00f0ff] transition-colors"
-                        aria-label="Live Demo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-purple-500/10 text-purple-300 border border-purple-500/25 hover:bg-purple-500/20 text-xs font-semibold transition-all duration-300"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Live Demo</span>
                       </a>
                     )}
                   </div>
@@ -129,6 +142,8 @@ const ProjectsSection = () => {
  
               <a
                 href={project.links.live || project.links.github || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-cyan-500/20 translate-y-1 group-hover:translate-y-0"
                 aria-label={`View ${project.title}`}
               >

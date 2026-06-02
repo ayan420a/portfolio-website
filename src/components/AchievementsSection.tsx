@@ -10,12 +10,14 @@ const achievements = [
     description:
       "Participated among 40,000+ participants at the AI Impact Summit, New Delhi.",
     icon: Trophy,
+    credentialUrl: "https://www.guvi.in/share-certificate/705R1m8k72A006P12N",
   },
   {
     title: "RIFT'26 Hackathon – PW IOI Lucknow",
     description:
       "Collaborated in a team to develop innovative technology solutions under time-constrained conditions.",
     icon: Award,
+    credentialUrl: "https://rift2026.vercel.app/verify/8e0982cb-e681-418f-bfb1-75c0a976ef4a",
   },
 ];
 
@@ -60,7 +62,9 @@ const AchievementsSection = () => {
                   {achievement.title}
                 </h4>
                 <a
-                  href="#"
+                  href={achievement.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-1 text-xs text-neutral-400 hover:text-[#00f0ff] transition-colors flex-shrink-0 mt-1 font-semibold"
                 >
                   <ExternalLink className="w-3 h-3 text-[#00f0ff]" />

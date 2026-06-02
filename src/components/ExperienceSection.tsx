@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, ChevronRight } from "lucide-react";
+import { Briefcase, Calendar, ChevronRight, ExternalLink } from "lucide-react";
 
 const experiences = [
   {
@@ -69,7 +69,17 @@ const ExperienceSection = () => {
                   {exp.type}
                 </span>
               </div>
-              <p className="text-neutral-200 font-semibold mb-1">{exp.company}</p>
+              <p className="mb-1">
+                <a
+                  href="https://www.linkedin.com/company/the-essence-india/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-200 hover:text-[#00f0ff] font-semibold transition-colors inline-flex items-center gap-1.5 group/company"
+                >
+                  <span>{exp.company}</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-neutral-400 group-hover/company:text-[#00f0ff] transition-colors" />
+                </a>
+              </p>
               <p className="text-sm text-neutral-400 flex items-center gap-1.5 mb-5 font-medium">
                 <Calendar className="w-3.5 h-3.5 text-[#00f0ff]" />
                 {exp.period}
